@@ -50,8 +50,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("땅에 있는 상태");
             canDash = true;
         }
-        else
-            Debug.Log("공중에 있는 상태");
 
         if (isGrounded && rb.velocity.y <= 0)
         {
