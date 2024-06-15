@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         // 캐릭터가 땅에 있는지 확인
         if (isGrounded)
         {
-            Debug.Log("땅에 있는 상태");
+            //Debug.Log("땅에 있는 상태");
             canDash = true;
         }
 
@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("is_Jump", true);
             animator.SetBool("is_Fall", false);
             jumpCount++;
+            Debug.Log($"점프: {jumpCount}, isGrounded: {isGrounded}");
             isGrounded = false; // 점프 시 isGrounded를 false로 설정
         }
     }
