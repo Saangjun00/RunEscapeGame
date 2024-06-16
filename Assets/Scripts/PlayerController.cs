@@ -109,6 +109,12 @@ public class PlayerController : MonoBehaviour
                 Invoke("Die", 1f);
             }
         }
+
+        // ESC키를 눌렀을 때 게임종료
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     void FixedUpdate()
