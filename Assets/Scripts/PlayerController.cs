@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
 
     private Rigidbody rb;
-    private Vector3 moveDirection;
+    public Vector3 moveDirection;
     private bool isGrounded;
     private int jumpCount;
     private bool canDash;
