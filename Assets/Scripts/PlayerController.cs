@@ -24,7 +24,9 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed = 0f;
     public float accleration = 4f;
 
-    public float minHeight;
+    public float minHeight = -10f;
+
+    private bool isDead = false;
 
     void Start()
     {
@@ -76,9 +78,37 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("is_Walk", moveDirection != Vector3.zero);
         animator.SetFloat("Speed", currentSpeed / maxMoveSpeed);
 
+        // R키 눌렀을 때 씬 재로드
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ReloadScene();
+        }
 
-        // 낭떠러지로 플레이어가 떨어지는지 체크
-        //ChangeSceneFallDown();
+        // 키패드 숫자로 씬 전환
+        // 키패드 숫자 입력으로 씬 변경
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            LoadScene(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            LoadScene(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            LoadScene(3);
+        }
+
+        // 일정 높이 이하로 떨어지면 캐릭터 사망
+        if (transform.position.y < minHeight)
+        {
+            if (!isDead)
+            {
+                isDead = true;
+                animator.SetBool("is_Hurt", true);
+                Invoke("Die", 1f);
+            }
+        }
     }
 
     void FixedUpdate()
@@ -140,14 +170,33 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector3.down * gravity * rb.mass); // 중력 적용
     }
 
-    /*
-    void ChangeSceneFallDown()
+    void OnCollisionEnter(Collision collision)
     {
-        if (transform.position.y > minHeight)
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            // 현재 씬을 로드 (현재 씬 재시작)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (!isDead)
+            {
+                isDead = true;
+                animator.SetBool("is_Hurt", true);
+                Invoke("Die", 1f);
+            }
         }
     }
-    */
+
+    void Die()
+    {
+        animator.SetBool("is_Hurt", false);
+        animator.SetBool("is_Dead", true);
+        Invoke("ReloadScene", 1.5f);
+    }
+
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void LoadScene(int sceneNumber)
+    {
+        SceneManager.LoadScene(sceneNumber);
+    }
 }
