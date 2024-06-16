@@ -17,13 +17,20 @@ public class Enemy : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
     private BoxCollider boxCollider;
-    private MeshCollider meshCollider;
     private Rigidbody rb;
     private bool isGrounded;
 
     public float chaseDistance = 20f;       // 몬스터가 플레이어를 추적할 거리
     private Vector3 startPos;               // 몬스터의 초기 위치
     public float stopDistance = 5f;         // 몬스터가 플레이어를 추적할 최소 거리
+
+    // 원래 박스 콜라이더 위치와 크기
+    private Vector3 originalColliderCenter;
+    private Vector3 originalColliderSize;
+
+    // 공격 시 콜라이더 위치와 크기
+    private Vector3 attackColliderCenter = new Vector3(0.006066442f, 0.3665345f, 1f);
+    private Vector3 attackColliderSize = new Vector3(2.201339f, 1f, 4.433465f);
 
     // 몬스터가 정찰할 위치 배열
     public Transform[] patrolPoints;
@@ -35,11 +42,10 @@ public class Enemy : MonoBehaviour
         rb.useGravity = false; // 기존 중력 사용하지 않음
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
-        meshCollider = GetComponent<MeshCollider>();
 
-        // 초기 상태 박스 콜라이더만 활성화
-        boxCollider.enabled = true;
-        meshCollider.enabled = false;
+        // 원래 박스 콜라이더의 위치와 크기 저장
+        originalColliderCenter = boxCollider.center;
+        originalColliderSize = boxCollider.size;
 
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -102,17 +108,6 @@ public class Enemy : MonoBehaviour
         {
             agent.isStopped = true;
             animator.SetBool("is_Attack", true);
-
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-            {
-                boxCollider.enabled = false;
-                meshCollider.enabled = true;
-            }
-            else
-            {
-                boxCollider.enabled = true;
-                meshCollider.enabled = false;
-            }
         }
         else
         {
@@ -136,5 +131,17 @@ public class Enemy : MonoBehaviour
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
             agent.SetDestination(patrolPoints[currentPatrolIndex].position);
         }
+    }
+
+    public void EnableAttackCollider()
+    {
+        boxCollider.center = attackColliderCenter;
+        boxCollider.size = attackColliderSize;
+    }
+
+    public void DisableAttackCollider()
+    {
+        boxCollider.center = originalColliderCenter;
+        boxCollider.size = originalColliderSize;
     }
 }
