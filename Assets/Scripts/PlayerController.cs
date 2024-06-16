@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
         rb.useGravity = false; // 기존 중력 사용하지 않음
         animator = GetComponent<Animator>();
         canDash = true;
+        
+
     }
 
     void Update()
@@ -203,5 +205,23 @@ public class PlayerController : MonoBehaviour
     void LoadScene(int sceneNumber)
     {
         SceneManager.LoadScene(sceneNumber);
+    }
+
+    private bool isGameCleared = false;
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Goal"))
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.GameClear(); // 게임 클리어 함수 호출
+                isGameCleared = true;
+                Destroy(other.gameObject); // goal 오브젝트 제거
+            }
+            else
+            {
+                Debug.LogError("GameManager Instance is null");
+            }
+        }
     }
 }
