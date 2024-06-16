@@ -33949,6 +33949,7 @@ MonoBehaviour:
   playerObj: {fileID: 784250077}
   rb: {fileID: 1924208130}
   rotationSpeed: 10
+  flashlight: {fileID: 0}
 --- !u!1001 &963454839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48323,7 +48324,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353774417}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13870119, y: 0.0000000085200345, z: -0.0000000011932727, w: 0.99033433}
+  m_LocalRotation: {x: 0.13870119, y: -0.000000008520035, z: 0.0000000011932728, w: 0.99033433}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -67801,7 +67802,7 @@ MonoBehaviour:
     m_Bits: 1024
   moveDirection: {x: 0, y: 0, z: 0}
   accleration: 4
-  minHeight: -3
+  minHeight: -160
 --- !u!1001 &1924477288
 PrefabInstance:
   m_ObjectHideFlags: 0
