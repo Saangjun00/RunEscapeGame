@@ -109,6 +109,11 @@ public class PlayerController : MonoBehaviour
                 Invoke("Die", 1f);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     void FixedUpdate()
