@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd6216a96ddadd46932b4a4021eef1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  maxMoveSpeed: 30
   dashSpeed: 15
   rotationSpeed: 10
   jumpForce: 10
@@ -852,6 +852,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024
+  moveDirection: {x: 0, y: 0, z: 0}
+  accleration: 4
+  minHeight: -10
+  jumpSound: {fileID: 8300000, guid: a8c2cb5bc1d43ef45b836085922a569f, type: 3}
+  runSound: {fileID: 8300000, guid: 936816772f52c4b438d40ef762018be0, type: 3}
+  dashSound: {fileID: 8300000, guid: 20b7922a410eb0940bc79b37fc5dd271, type: 3}
 --- !u!4 &7826617720407703488 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 589e7e5411762444bb7716e1fb45a55c, type: 3}

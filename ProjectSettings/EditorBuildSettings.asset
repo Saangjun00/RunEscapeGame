@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/MinSeuk/Start Scene.unity
     guid: 6150933d7930d6f4ea5baa75c56a97f5
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
     path: Assets/Minseong/FirstWorld v2.unity
     guid: 548cd84657932bc4486033da3b8d515a
   - enabled: 1

@@ -28,14 +28,19 @@ public class PlayerController : MonoBehaviour
 
     private bool isDead = false;
 
+    // 오디오 클립
+    public AudioClip jumpSound;
+    public AudioClip runSound;
+    public AudioClip dashSound;
+    private AudioSource audioSource;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false; // 기존 중력 사용하지 않음
         animator = GetComponent<Animator>();
         canDash = true;
-        
-
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -134,10 +139,19 @@ public class PlayerController : MonoBehaviour
 
             // 가속
             currentSpeed = Mathf.MoveTowards(currentSpeed, maxMoveSpeed, accleration * Time.deltaTime);
+
+            // 소리 재생
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = runSound;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
         }
         else
         {
             currentSpeed = 0f;
+            audioSource.Stop();
         }
 
         Vector3 movement = moveDirection * currentSpeed * Time.deltaTime;
@@ -157,6 +171,8 @@ public class PlayerController : MonoBehaviour
             jumpCount++;
             Debug.Log($"점프: {jumpCount}, isGrounded: {isGrounded}");
             isGrounded = false; // 점프 시 isGrounded를 false로 설정
+
+            audioSource.PlayOneShot(jumpSound);
         }
     }
 
@@ -169,6 +185,8 @@ public class PlayerController : MonoBehaviour
 
             animator.SetBool("is_Dash", true);
             canDash = false;
+
+            audioSource.PlayOneShot(dashSound);
         }
     }
 
