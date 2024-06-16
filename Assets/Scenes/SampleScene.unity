@@ -5100,6 +5100,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9007400597151686094, guid: 4e347ae918e5e3d46b1e15d2ea134c12, type: 3}
+      propertyPath: stopDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9007400597151686094, guid: 4e347ae918e5e3d46b1e15d2ea134c12, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1828601336}

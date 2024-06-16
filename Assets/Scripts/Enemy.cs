@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     public float chaseDistance = 20f;       // 몬스터가 플레이어를 추적할 거리
     private Vector3 startPos;               // 몬스터의 초기 위치
-    public float stopDistance = 5f;         // 몬스터가 플레이어를 추적할 최소 거리
+    public float stopDistance = 4f;         // 몬스터가 플레이어를 추적할 최소 거리
 
     // 원래 박스 콜라이더 위치와 크기
     private Vector3 originalColliderCenter;

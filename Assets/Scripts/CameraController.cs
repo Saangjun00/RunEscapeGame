@@ -20,6 +20,7 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        // 스포트라이트가 카메라의 자식 오브젝트인지 확인
         if (flashlight == null)
         {
             flashlight = GetComponentInChildren<Light>();
